@@ -45,3 +45,20 @@ resource "aws_lambda_function" "delete_function" {
 
   runtime = "provided.al2023"
 }
+
+resource "aws_apigatewayv2_api" "delete_endpoint" {
+  name = "terraform_delete_player_endpoint"
+  protocol_type = "HTTP"
+}
+
+resource "aws_apigatewayv2_integration" "delete_endpoint_integration" {
+  api_id = aws_apigatewayv2_api.delete_endpoint.id
+  integration_type = "AWS_PROXY"
+
+  connection_type = "INTERNET"
+  content_handling_strategy = "CONVERT_TO_TEXT"
+  description = "Delete player by their name"
+  integration_method = "DELETE"
+  integration_uri = aws_lambda_function.delete_function.invoke_arn
+  passthrough_behavior = "WHEN_NO_MATCH"
+}
