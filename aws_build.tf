@@ -107,7 +107,7 @@ resource "aws_apigatewayv2_route" "delete_endpoint_route" {
 resource "aws_lambda_permission" "api_invoke_permission" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.delete_function
+  function_name = aws_lambda_function.delete_function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.delete_endpoint.execution_arn}/*/*/*"
 }
