@@ -90,7 +90,6 @@ resource "aws_apigatewayv2_integration" "delete_endpoint_integration" {
   integration_type = "AWS_PROXY"
 
   connection_type = "INTERNET"
-  content_handling_strategy = "CONVERT_TO_TEXT"
   description = "Delete player by their name"
   integration_method = "DELETE"
   integration_uri = aws_lambda_function.delete_function.invoke_arn
