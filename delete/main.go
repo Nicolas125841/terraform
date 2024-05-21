@@ -15,7 +15,7 @@ import (
 )
 
 type Player struct {
-	Name string `dynamodbav:"Name" json:"name"`
+	Name string `dynamodbav:"name" json:"name"`
 }
 
 type PlayerLoadContent struct {
