@@ -91,15 +91,14 @@ resource "aws_apigatewayv2_integration" "delete_endpoint_integration" {
 
   connection_type = "INTERNET"
   description = "Delete player by their name"
-  integration_method = "DELETE"
+  integration_method = "POST"
   integration_uri = aws_lambda_function.delete_function.invoke_arn
-  passthrough_behavior = "WHEN_NO_MATCH"
 }
 
 resource "aws_apigatewayv2_route" "delete_endpoint_route" {
   api_id = aws_apigatewayv2_api.delete_endpoint.id
 
-  route_key = "DELETE /player"
+  route_key = "POST /player"
   target = "integrations/${aws_apigatewayv2_integration.delete_endpoint_integration.id}"
 }
 
